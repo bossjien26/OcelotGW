@@ -1,0 +1,27 @@
+{
+    "Routes": [
+        {
+            "UpstreamPathTemplate": "/api/WeatherForecast",
+            "UpstreamHttpMethod": ["Get"],
+            "DownstreamPathTemplate": "/api/WeatherForecast",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 5016
+            }]
+        },
+        {
+            "UpstreamPathTemplate": "/api/test/{id}",
+            "UpstreamHttpMethod": ["Get", "Delete"],
+            "DownstreamPathTemplate": "/api/WeatherForecast/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 5016
+            }]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:5234"
+    }
+}
