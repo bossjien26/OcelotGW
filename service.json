@@ -1,0 +1,23 @@
+{
+  "services": [
+    {
+      "id": "webapi1",
+      "name": "webapi1",
+      "tags": [
+        "primary"
+      ],
+      "address": "172.17.0.3",
+      "port": 80,
+      "checks": [
+        {
+          "http": "http://172.17.0.3:80/api/healthz",
+          "tls_skip_verify": false,
+          "method": "Get",
+          "interval": "10s",
+          "timeout": "1s"
+        }
+      ],
+      "token": "token_value"
+    }
+  ]
+}

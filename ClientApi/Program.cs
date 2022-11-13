@@ -1,4 +1,3 @@
-using ClientApi;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
@@ -14,8 +13,9 @@ builder.Services.AddSwaggerGen();
 // builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
 //     .AddJsonFile("Ocelot.json", optional: false, reloadOnChange: true)
 //     .AddEnvironmentVariables();
-builder.Configuration.AddJsonFile("Ocelot.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("Ocelot.json", optional: true, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration).AddConsul();
+builder.Services.AddHealthChecks();
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
     builder.AllowAnyOrigin()
@@ -26,12 +26,12 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI();
+// }
+app.MapHealthChecks("/api/healthz");
 // app.UseHttpsRedirection();
 app.UseOcelot().GetAwaiter().GetResult();
 // app.UseAuthorization();

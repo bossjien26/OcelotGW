@@ -1,0 +1,30 @@
+{
+    "datacenter": "east-aws",
+    "data_dir": "/opt/consul",
+    "log_level": "INFO",
+    "node_name": "node1",
+    "server": true,
+    "watches": [
+        {
+            "type": "checks",
+            "handler": "/usr/bin/health-check-handler.sh"
+        }
+    ],
+    "telemetry": {
+        "statsite_address": "127.0.0.1:2180"
+    },
+    "audit": {
+        "enabled": true,
+        "sink": {
+            "My sink": {
+                "type": "file",
+                "format": "json",
+                "path": "data/audit/audit.json",
+                "delivery_guarantee": "best-effort",
+                "rotate_duration": "24h",
+                "rotate_max_files": 15,
+                "rotate_bytes": 25165824
+            }
+        }
+    }
+}
