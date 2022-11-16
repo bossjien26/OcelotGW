@@ -5,27 +5,27 @@
             "UpstreamHttpMethod": ["Get"],
             "DownstreamPathTemplate": "/api/WeatherForecast",
             "DownstreamScheme": "http",
-            "ServiceName": "webapi1",
-            "UseServiceDiscovery": true
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 5016
+            }],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "UpstreamPathTemplate": "/api/test/{id}",
             "UpstreamHttpMethod": ["Get", "Delete"],
             "DownstreamPathTemplate": "/api/WeatherForecast/{id}",
             "DownstreamScheme": "http",
-            "ServiceName": "webapi1",
-            "UseServiceDiscovery": true
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 5016
+            }]
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "http://localhost",
-        "GlobalConfiguration": {
-            "ServiceDiscoveryProvider": {
-              "Host": "172.17.0.1",
-              "Port": 8500,
-              "Type": "Consul",
-              "Token": "anonymous"
-            }
-        }
+        "BaseUrl": "http://localhost:5234"
     }
 }
